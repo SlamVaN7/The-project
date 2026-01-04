@@ -1,0 +1,421 @@
+=== Muss-Kriterien
+Was das zu erstellende Programm auf alle Fälle leisten muss.
+
+[width="100%",cols="11%,10%,24%,55%",options="header",]
+|===
+|ID |Version |Name |Beschreibung
+|[[F0010]] *<<F0010>>* | v0.1 |Authentifizierung |Die Applikation unterteilt sich
+in öffentlich einsehbare Teile und solche, die eine Authentifizierung
+benötigen. Existiert ein Nutzer bereits im System, kann er sich durch
+die Nutzung von Benutzername und Passwort authentifizieren.
+
+|[[F0011]] *<<F0011>>* | v0.1 |Authentifizierung validieren |Das System überprüft
+die Daten der Authentifizierung. Ist die Validierung erfolgreich, wird
+der Nutzer angemeldet. Scheitert sie, bleibt der Nutzer in seiner
+vorherigen Rolle und wird darüber informiert.
+
+|[[F0020]] *<<F0020>>* | v2.0 |Registrierung |Die Applikation soll einem neuen
+Nutzer die Möglichkeit geben, sich durch Angabe von Benutzername
+(einzigartig) und Passwort anzumelden.
+
+|[[F0021]] *<<F0021>>*| v2.0 |Registrierung validieren |Die Daten der
+Registrierung (<<F0020>>) sollen validiert werden können. Dabei
+muss sichergestellt werden, dass der Benutzername einzigartig ist.
+
+|[[F0030]] *<<F0030>>* |v0.1 |Ausloggen |Ein angemeldeter Nutzer kann durch das
+klicken von “Ausloggen” wieder in die Rolle eines Gastnutzers
+zurückkehren.
+
+|[[F0100]] *<<F0100>>* |v1.0 |Inventar a|
+Mit dem Inventar wird der Bestand aller Artikel aus dem Katalog (<<F0200>>) verwaltet.
+
+|[[F0101]] *<<F0101>>* |v2.0 |Inventar einsehen |Mitarbeiter sollen das Inventar
+einsehen können. Dabei werden ihnen alle Produktdetails gemäß
+<<F0200>> zu jedem Artikel angezeigt.
+
+|[[F0102]] *<<F0102>>*|v1.0 |Artikel hinzufügen |Artikel aus dem Katalog sollen durch Angabe der Anzahl durch Mitarbeiter dem Inventar hinzugefügt werden können.
+
+|[[F0103]] *<<F0103>>* |v1.0 |Artikel entfernen | Ein Artikel wird aus dem Inventar entfernt, wenn er aus dem Katalog entfernt wurde.
+
+|[[F0104]] *<<F0104>>* |v0.1 |Anzahlreduktion a|
+Die Anzahl eines jeden Artikels im Inventar soll reduzierbar sein.
+
+Es wird <<F0110>> durchgeführt.
+
+|[[F0105]] *<<F0105>>*| v0.1|Anzahlerhöhung |Die Anzahl eines jeden Artikels im
+Inventar soll erhöhbar sein.
+
+|[[F0110]] *<<F0110>>* |v0.1 |Validierung ausreichende Anzahl |Das System soll
+sicherstellen können, dass eine Mindestanzahl von jedem Artikel im
+Inventar vorhanden ist. Dafür prüft es die Produktdetails: Lagerbestand
+und Mindestmenge (<<F0200>>), wenn eine Änderung an der Anzahl
+eines Produktes durchgeführt wird. Ist der Lagerbestand ++<++
+Mindestmenge, wird <<F0111>> ausgelöst. Ergibt der Lagerbestand 0,
+soll <<F0112>> ausgelöst werden. Ist der Lagerbestand ++<++ 0,
+soll eine Fehlernachricht vermerkt werden. (= Nur Debug. Das darf
+eigentlich nicht passieren.)
+
+|[[F0111]] *<<F0111>>* | v0.1 |Warnung geringe Menge |Stellt das System nach
+<<F0110>> fest, dass die Mindestanzahl unterschritten ist, weist
+es die Mitarbeiter mit einem Banner daraufhin.
+
+|[[F0112]] *<<F0112>>*| v1.0 |Angebotsentfernung |Steht ein Artikel im Inventar
+nicht mehr zur Verfügung, werden die Mitarbeiter darüber benachrichtigt. Außerdem taucht eine Warnung bei dem Artikel auf. Er ist nun nicht mehr kaufbar.
+
+|[[F0113]] *<<F0113>>* | v0.1 |Validierung mögliche Bestellung |Das System soll
+validieren können, dass im Inventar von jedem Artikel mindestens so
+viele Exemplare vorhanden sind, wie in einer Bestellung aufgegeben. 
+
+|[[F0120]] *<<F0120>>*| v2.0 |Produktdetails einsehen |Mitarbeiter können die in
+<<F0200>> beschriebenen Produktdetails eines Artikels einsehen.
+
+|[[F0130]] *<<F0130>>* |v0.1 |MHD Prüfung |Das System soll jeden Tag alle Artikel
+der Kategorie Tierfutter (<<F0200>>) auf ihr Haltbarkeitsdatum
+prüfen. Für jedes abgelaufene Produkt erhalten die Mitarbeiter eine
+Benachrichtigung und die Menge wird automatisch gemäß <<F0104>>
+aus dem Inventar abgezogen.
+
+|[[F0200]] *<<F0200>>* |v1.0 |Katalog | Das System soll die Möglichkeit haben, alle Artikel mit Produktdetails
+und in Kategorien unterteilt zu speichern. Dies geschieht im Katalog.
+
+Zu den Produktdetails gehört:
+
+•⁠  ⁠Artikelnummer
+•⁠  ⁠Artikelname
+•⁠  ⁠Lagerbestand
+•⁠  ⁠Mindestmenge
+•⁠  ⁠Lieferant
+•⁠  ⁠Ankaufspreis
+•⁠  ⁠Verkaufspreis
+•⁠  ⁠Haltbarkeitsdatum (falls Futter)
+•⁠  ⁠Kategorie
+
+Die Kategorie unterteilt sich in:
+
+•⁠  ⁠Lebendtiere
+•⁠  ⁠Tierfutter
+•⁠  ⁠Zubehör
+•⁠  ⁠Dienstleistungen
+
+|[[F0201]] *<<F0201>>* |v1.0 |Katalog einsehen a|
+Mitarbeiter können den kompletten Katalog über das Inventar einsehen (<<F0101>>).
+
+|[[F0202]] *<<F0202>>* |v1.0 |Katalog erweitern |Mitarbeiter können dem Katalog
+neue Artikel hinzufügen.
+
+|[[F0203]] *<<F0203>>* |v1.0 |Katalog verkleinern |Mitarbeiter können Artikel aus dem
+Katalog entfernen.
+
+|[[F0210]] *<<F0210>>* |v0.1 |Lebendtiere einsehen |Nutzer können alle Artikel
+aus dem Katalog, die gemäß <<F0200>> der Kategorie Lebendtiere
+zugeordnet wurden, einsehen.
+
+|[[F0211]] *<<F0211>>*|v0.1 |Tierfutter einsehen |Nutzer können alle Artikel
+aus dem Katalog, die gemäß <<F0200>> der Kategorie Tierfutter
+zugeordnet wurden, einsehen.
+
+|[[F0212]] *<<F0212>>* |v0.1 |Zubehör einsehen |Nutzer können alle Artikel aus
+dem Katalog, die gemäß <<F0200>> der Kategorie Zubehör zugeordnet
+wurden, einsehen.
+
+|[[F0213]] *<<F0213>>* |v0.1 |Dienstleistungen einsehen |Nutzer können alle
+Artikel aus dem Katalog, die gemäß <<F0200>> der Kategorie
+Dienstleistungen zugeordnet wurden, einsehen.
+
+|[[F0220]] *<<F0220>>* |v0.1 |Aktionssets erstellen a|
+Mitarbeiter sollen die Möglichkeit haben, aus Bestandsartikeln des
+Katalogs Aktionssets zu erstellen. Dabei muss angegeben sein:
+
+•⁠  ⁠Aktionszeitraum
+
+•⁠  ⁠Rabattierung
+•⁠  ⁠betroffene Artikel
+
+|[[F0221]] *<<F0221>>* |v0.1 |Aktionsset löschen |Ein Aktionsset soll nach dem
+Aktionszeitraum automatisch gelöscht werden. Die Zoohandlung soll
+darüber hinaus die Aktion vorzeitig beenden und damit löschen können.
+
+|[[F0230]] *<<F0230>>*|v0.1 |Aktionsflyer erstellen |Aus Aktionssets und
+Bestandsartikeln soll sich ein Banner erstellen lassen, welcher auf die
+Aktion hinweist.
+
+|[[F0240]] *<<F0240>>* |v0.1 |Produktrabatt a|
+Die Mitarbeiter sollen die Möglichkeit haben, einzelne Produkte zu
+rabattieren. Dafür soll angegeben werden:
+
+•⁠  ⁠Rabattzeitraum
+•⁠  ⁠Rabattierung
+
+|[[F0241]] *<<F0241>>* |v0.1 |Produktrabatt löschen |Die Mitarbeiter können
+Produktrabatte frühzeitig beenden und somit löschen. Alternativ wird der
+Rabattaktion gelöscht, sobald der Rabattzeitraum abgelaufen ist.
+
+|[[F0300]] *<<F0300>>* |v0.1 |Warenkorb |Der Warenkorb verwaltet Artikel aus dem
+Katalog für einen Kunden. Gastnutzer sollen bei Zugriff auf den
+Warenkorb zur Registrierung <<F0020>> geleitet werden.
+
+|[[F0301]] *<<F0301>>* |v0.1 |Warenkorb einsehen a|
+Kunden haben die Möglichkeit, ihren Warenkorb einzusehen. Es soll
+dabei folgendes angezeigt werden:
+
+•⁠  ⁠Artikelname (für jeden Artikel)
+•⁠  ⁠Anzahl des Artikels (für jeden Artikel)
+•⁠  ⁠Verkaufspreis (für jeden Artikel)
+•⁠  ⁠Gesamtkosten der Artikel im Warenkorb
+
+Gastnutzer sollen zur Registrierung <<F0020>> geleitet werden.
+
+|[[F0302]] *<<F0302>>*|v0.1 |Warenkorb Artikel hinzufügen a|
+Kunden haben die Möglichkeit einen Artikel aus dem Katalog dem
+Warenkorb hinzuzufügen.
+
+Gastnutzer sollen zur Registrierung <<F0020>> geleitet werden.
+
+|[[F0303]] *<<F0303>>* |v0.1 |Warenkorb Artikel entfernen |Kunden haben die
+Möglichkeit, einen Artikel aus dem Warenkorb zu entfernen.
+
+|[[F0310]] *<<F0310>>*|v0.1 |Bestellungen |Kunden können Bestellungen aufgeben,
+diese beinhalten alle Artikel, die sich in ihrem Warenkorb befinden. Das
+System kann Bestellungen speichern und verarbeiten.
+
+|[[F0311]] *<<F0311>>* |v0.1 |Bestellungen überprüfen a|
+Wenn Kunden auf “Bestellung aufgeben” klicken, wird die Verfügbarkeit
+der Artikel in ihrem Warenkorb erneut geprüft gemäß <<F0113>>.
+Gibt es die angefragte Anzahl eines Artikels nicht mehr, so wird der
+Kunde nicht weitergeleitet, sondern verbleibt im Warenkorb und wird
+über das Problem informiert.
+
+Gibt es kein Problem bei der Prüfung, wird der Kunde zur Zahlung
+<<F0316>> weitergeleitet.
+
+|[[F0312]] *<<F0312>>*|v0.1 |Bestellung abschließen |Wenn eine Bestellung bezahlt
+wurde <<F0316>>, wird die Bestellung abgeschlossen und an die
+Zoohandlung weitergeleitet. Im System wird die Bestellung gespeichert
+und die Änderungen am Bestand vermerkt <<F0105>>.
+
+|[[F0313]] *<<F0313>>* |v0.1 |Bestellung anfragen |Für exotische Tiere soll es die
+Möglichkeit geben, eine Bestellung anzufragen. Bei der Anfrage muss eine
+pdf-Datei mit einem Nachweis der Befähigung zur Haltung von exotischen
+Tieren beigelegt werden.
+
+|[[F0314]] *<<F0314>>*|v0.1 |Bestellung akzeptieren a|
+Eine Bestellung von exotischen Tieren kann von einem Mitarbeiter
+akzeptiert werden. Danach wird die Bestellung des exotischen Tieres bei
+dem externen Anbieter ausgelöst. Der Bestand automatisch erhöht
+<<F0105>>. Die Ausgabe wird nach <<F0401>> behandelt. Dafür
+wird übergeben (in dieser Reihenfolge):
+
+•⁠  ⁠Tierart
+•⁠  ⁠Kundenname
+•⁠  ⁠Kosten
+•⁠  ⁠Lebendtiere (als Kategorie)
+
+Der Kunde erhält eine Benachrichtigung über die akzeptierte Anfrage
+mit möglichem Abholdatum und wird zur Zahlung <<F0316>> geleitet .
+
+|[[F0315]] *<<F0315>>* |v0.1 |Bestellung ablehnen |Eine Bestellung von exotischen
+Tieren kann von einem Mitarbeiter abgelehnt werden. Der Kunde wird
+über die Ablehnung informiert. Die Bestellung erhält den Status “denied”
+und wird trotz nicht erfolgter Zahlung nach <<F0312>> weiter
+verarbeitet.
+
+|[[F0316]] *<<F0316>>* |v0.1 |Bestellung zahlen a|
+Angemeldete Nutzer sollen durch Angabe von:
+
+•⁠  ⁠Vor- und Nachname
+•⁠  ⁠Kreditkartennummer
+
+die Bestellung zahlen können.
+
+(Die Angaben werden nicht überprüft, da, wie mit dem Tutor besprochen,
+keine tatsächliche Zahlung erfolgen muss.)
+
+Das System verarbeitet dann gemäß <<F0312>>.
+
+|[[F0317]] *<<F0317>>* |v0.1 |Bestellungen einsehen (Kunden) a|
+Kunden können ihre eigenen Bestellungen und deren Status einsehen.
+Dabei wird ihnen von jeder Bestellung angezeigt:
+
+•⁠  ⁠Artikelnamen
+•⁠  ⁠Gesamter Kaufpreis
+•⁠  ⁠Status (pending, accepted, denied)
+
+|[[F0318]] *<<F0318>>* |v0.1 |Bestellungen einsehen (Mitarbeiter) a|
+Mitarbeiter können eine Liste aller Bestellungen einsehen. Dabei wird
+ihnen bei jeder Bestellung angezeigt:
+
+•⁠  ⁠Kundenname
+•⁠  ⁠Artikelnamen
+•⁠  ⁠Gesamter Kaufpreis
+•⁠  ⁠Status (pending, accepted, denied)
+
+|[[F0320]] *<<F0320>>* |v0.1 |Dienstleistung anfragen a|
+Kunden sollen die Dienstleistung (Pension) anfragen können. Dabei
+müssen sie folgende Daten angeben:
+
+•⁠  ⁠Tierart
+•⁠  ⁠Aufenthaltszeitraum
+•⁠  ⁠Persönliche Daten (Vor- und Nachname, Adresse)
+•⁠  ⁠Begründung für längeren Aufenthalt bei einem Zeitraum über 3 Wochen
+
+Freiwillige Angabe:
+
+•⁠  ⁠Futterpräferenzen (Art des Futters und Uhrzeit)
+
+Die Kunden werden auf einen Frühbucherrabatt hingewiesen. Sollte es
+einen Anspruch auf Frühbucherrabatt geben, wendet das System diesen
+direkt auf den Kaufpreis an.
+
+Die Kunden werden darauf hingewiesen, dass ihre Anfrage nicht akzeptiert
+ist, bis sie beantwortet wurde.
+
+|[[F0321]] *<<F0321>>* |v0.1 |Systemprüfung a|
+Das System prüft, ob alle Pflichtangaben (<<F0320>>) ausgefüllt
+wurden.
+
+Das System prüft den angegebenen Aufenthaltszeitraum.
+
+|[[F0322]] *<<F0322>>*|v0.1 |Systemablehnung |Ergibt die Systemprüfung
+<<F0321>>, dass nicht alle Pflichtangaben ausgefüllt wurden oder
+dass der Aufenthaltszeitraum mindestens einen Tag enthält, an dem es
+keine Kapazitäten für die angegebene Tierart gibt, so wird der Nutzer
+über den Grund der Ablehnung informiert.
+
+|[[F0323]] *<<F0323>>* |v0.1 |Systemakzeptanz |Ergibt die Systemprüfung
+<<F0321>>, dass alle Pflichtangaben ausgefüllt wurden und dass der
+Aufenthaltszeitraum genügend Kapazitäten hat, wird die Bestellung mit
+dem Status “pending” gespeichert und an die Mitarbeiter
+weitergeleitet.
+
+|[[F0324]] *<<F0324>>* |v0.1 |Dienstleistung akzeptieren |Die Mitarbeiter können
+die angefragte Dienstleistung annehmen. Der Status der Bestellung wird
+dann aktualisiert (“accepted”) und der Kunde wird informiert, dass er
+zahlen kann, um die Bestellung abzuschließen (<<F0316>>).
+
+|[[F0325]] *<<F0325>>* |v0.1 |Dienstleistung ablehnen |Die Mitarbeiter können
+die angefragte Dienstleistung ablehnen. Der Status der Bestellung wird
+dann aktualisiert (“denied”) und die Bestellung nach <<F0312>>
+trotz nicht erfolgter Zahlung weiter abgewickelt. Der Kunde wird
+darüber informiert.
+
+|[[F0400]] *<<F0400>>* |v0.1 |Kostenverwaltung |Das System speichert die Einnahmen
+durch Bestellungen und die Ausgaben, welche die Mitarbeiter angeben
+können oder im Fall von exotischen Tieren, automatisch bei der
+Bestellung gespeichert werden. Alle Einnahmen werden gemäß ihrer
+Kategorie im Inventar <<F0100>> sortiert. Ausgaben werden nach
+ihrer Kategorie gemäß <<F0401>> sortiert.
+
+|[[F0401]] *<<F0401>>* |v0.1 |Ausgabe erstellen a|
+Ausgaben können von Mitarbeitern oder das System durch die Angabe von:
+
+•⁠  ⁠Kurzname
+•⁠  ⁠Kunde
+•⁠  ⁠Kosten
+•⁠  ⁠Kategorie
+
+erstellt werden.
+
+Das System erteilt der Ausgabe eine einmalige ID. 
+
+Der Mitarbeiter kann bei der Kategorie aus folgenden Möglichkeiten
+wählen:
+
+•⁠  ⁠Lebendtiere
+•⁠  ⁠Tierfutter
+•⁠  ⁠Zubehör
+•⁠  ⁠Dienstleistungen
+•⁠  ⁠Tierarzt
+•⁠  ⁠Wartung/Säuberung
+•⁠  ⁠Sonstige
+
+Das System wählt immer die Kategorie “Lebendtiere”.
+
+|[[F0410]] *<<F0410>>* |v0.1 |Einnahmen einsehen |Der Chef kann den Gesamtwert
+aller Bestellungen der Kunden für einen ausgewählten Zeitraum (in
+monatlichen Abständen) einsehen. Es gibt eine Graphik, die das
+veranschaulicht.
+
+|[[F0411]] *<<F0411>>* |v0.1 |Einnahmen aufsplitten |Der Chef kann gemäß
+<<F0410>> einsehen, wie sich der Gesamtwert aller Bestellungen der
+Kunden auf die in <<F0400>> beschriebenen Kategorien verteilt. 
+
+|[[F0420]] *<<F0420>>* |v0.1 |Ausgaben einsehen |Der Chef kann den Gesamtwert
+ihrer Ausgaben für einen ausgewählten Zeitraum (in monatlichen
+Abständen) einsehen. Es gibt eine Graphik, die das veranschaulicht.
+
+|[[F0421]] *<<F0421>>*|v0.1 |Ausgaben aufsplitten |Der Chef kann gemäß
+<<F0420>> einsehen, wie sich der Gesamtwert ihrer Ausgaben auf die
+in <<F0400>> beschriebenen Kategorien verteilt.
+
+|[[F0430]] *<<F0430>>* |v0.1 |Gewinn einsehen |Der Chef kann einsehen, wie viel
+von ihren Einnahmen nach Abzug der Ausgaben bleibt. Es gibt eine
+Graphik, die das für einen ausgewählten Zeitraum (in monatlichen
+Abständen) veranschaulicht.
+
+|[[F0431]] *<<F0431>>* |v0.1 |Gewinn aufsplitten |Der Chef kann die Graphik von
+<<F0430>> nach den in <<F0400>> beschriebenen Kategorien
+unterteilen.
+
+|[[F0500]] *<<F0500>>* |v0.1 |Navigation |Alle Benutzer sollen auf der Webseite von der Startseite aus
+navigieren können.
+
+|[[F0510]] *<<F0510>>* |v0.1 | Lebendtiere navigieren | Von der Startseite aus können alle Nutzer mit einem Klick auf den Reiter "Lebendtiere" zum Katalogausschnitt der Lebendtiere <<F0210>> navigieren.
+
+|[[F0511]] *<<F0511>>*|v0.1 | Lebendtierauswahl | Alle Nutzer sollen  durch einen Klick auf "mehr Details" bei einem Artikel im "Lebendtiere" Reiter zu der direkten Ansicht dieses Artikels gelangen, wo sie diesen dann auch kaufen können.
+
+|[[F0520]] *<<F0520>>* |v0.1 | Tierfutter navigieren | Von der Startseite aus können alle Nutzer mit einem Klick auf den Reiter "Tierfutter" zum Katalogausschnitt des Tierfutters <<F0220>> navigieren.
+
+|[[F0521]] *<<F0521>>*|v0.1 | Tierfutterauswahl | Alle Nutzer sollen  durch einen Klick auf "mehr Details" bei einem Artikel im "Tierfutter" Reiter zu der direkten Ansicht dieses Artikels gelangen, wo sie diesen dann auch kaufen können.
+
+|[[F0530]] *<<F0530>>* |v0.1 | Zubehör navigieren | Von der Startseite aus können alle Nutzer mit einem Klick auf den Reiter "Zubehör" zum Katalogausschnitt des Zubehörs <<F0230>> navigieren.
+
+|[[F0531]] *<<F0531>>*|v0.1 | Zubehörauswahl | Alle Nutzer sollen  durch einen Klick auf "mehr Details" bei einem Artikel im "Zubehör" Reiter zu der direkten Ansicht dieses Artikels gelangen, wo sie diesen dann auch kaufen können.
+
+|[[F0540]] *<<F0540>>* |v0.1 | Dienstleistungen navigieren | Von der Startseite aus können alle Nutzer mit einem Klick auf den Reiter "Dienstleistungen" zum Katalogausschnitt der Dienstleistungen <<F0240>> navigieren.
+
+|[[F0541]] *<<F0541>>*|v0.1 | Dienstleistungsauswahl | Alle Nutzer sollen  durch einen Klick auf "mehr Details" bei einem Artikel im "Dienstleistungen" Reiter zu der direkten Ansicht dieses Artikels gelangen.
+
+|[[F0550]] *<<F0550>>*|v0.1 | Login navigieren | Alle Nutzer sollen  durch einen Klick auf "Login" zu einer Seite gelangen, wo sie sich gemäß <<F0010>> anmelden können.
+
+|[[F0551]] *<<F0551>>*|v0.1 | Login bestätigen | Durch das Drücken von "Login" auf der Login-Seite, soll der Nutzer seine Daten bestätigen können. Ist der Login erfolgreich, so wird der Nutzer auf die Startseite zurück geleitet, nun aber in der Kunden-Ansicht. Scheitert die Authentifizierung gemäß <<F0011>> verbleibt der Nutzer auf der Login-Seite.
+
+|[[F0552]] *<<F0552>>*| v0.1 | Registrierung navigieren | Durch das Drücken von "oder hier registrieren" auf der Login-Seite, kann der Nutzer zur Registrierungsseite geleitet werden.
+
+|[[F0553]] *<<F0553>>*|v0.1 | Registrierung abschließen | Durch das Drücken von "Registrieren" auf der Registrierungsseite, kann der Nutzer bei erfolgreicher Registrierung gemäß <<F0021>> zur Login-Seite weitergeleitet werden und dort nach <<F0550>> fortschreiten. Ist die Registrierung nicht erfolgreich, verbleibt der Nutzer auf der Registrierungsseite.
+
+|[[F0560]] *<<F0560>>*|v0.1 | Warenkorb navigieren |Durch das Drücken des Warenkorbsymbols können Kunden Einsicht zu ihrem Warenkorb <<F0301>> erlangen.
+
+|[[F0561]] *<<F0561>>*|v0.1 | Warenkorb kaufen |Durch das Drücken von "Kaufen" gelangen Kunden zur Zahlseite, wo sie den Kauf gemäß <<F0316>> zahlen können.
+
+|[[F0562]] *<<F0562>>*|v0.1 | Zahlung beenden | Durch das drücken von "jetzt zahlen", wird der Kauf gemäß <<F0312>> abgeschlossen und der Kunde zu seiner Bestellungen-Seite <<F0317>> weitergeleitet.
+
+|[[F0600]] *<<F0600>>* |v0.1 |Nutzerverwaltung |Den Mitarbeitern und dem
+Chef soll es möglich sein, die angemeldeten Nutzer zu verwalten.
+
+|[[F0610]] *<<F0610>>* |v0.1 |Kunden verwalten |Mitarbeiter können eine Liste
+aller Kunden einsehen.
+
+|[[F0611]] *<<F0611>>* |v0.1 |Kunden hinzufügen |Mitarbeiter können zu der in
+<<F0610>> spezifizierten Liste Kunden hinzufügen.
+
+|[[F0612]] *<<F0612>>* |v0.1 |Kunden entfernen |Mitarbeiter können aus der in
+<<F0610>> spezifizierten Liste Kunden entfernen.
+
+|[[F0620]] *<<F0620>>* | v0.1 |Lieferanten verwalten |Mitarbeiter können eine
+Liste aller Lieferanten einsehen.
+
+|[[F0621]] *<<F0621>>* | v0.1 |Lieferanten hinzufügen |Mitarbeiter können zu der
+in <<F0620>> spezifizierten Liste Lieferanten hinzufügen.
+
+|[[F0622]] *<<F0622>>* |v0.1 |Lieferanten entfernen |Mitarbeiter können aus der
+in <<F0620>> spezifizierten Liste Lieferanten entfernen.
+
+|[[F0630]] *<<F0630>>* | v0.1 |Mitarbeiter verwalten |Der Chef kann eine Liste
+aller Mitarbeiter einsehen.
+
+|[[F0631]] *<<F0631>>* |v0.1 |Mitarbeiter hinzufügen |Der Chef kann zu der in
+<<F0630>> spezifizierten Liste Mitarbeiter hinzufügen.
+
+|[[F0632]] *<<F0632>>* | v0.1 |Mitarbeiter entfernen |Der Chef kann aus der in
+<<F0630>> spezifizierten Liste Mitarbeiter entfernen.
+|===
